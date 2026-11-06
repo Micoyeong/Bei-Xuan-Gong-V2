@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#17130f">
+<title>北玄宫 BEI XUAN GONG V2.0 | V2.0</title>
+<style>
+:root{--gold:#d9bb82;--cream:#f5eee2;--ink:#17130f;--muted:#c9bda9}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#17130f;color:var(--cream);font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
+a{color:inherit;text-decoration:none}.top{position:absolute;z-index:3;top:0;left:0;right:0;padding:22px 6vw;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #ffffff22}
+.brand{font-size:12px;letter-spacing:.22em;color:#ead5ad}.nav{display:flex;gap:22px;font-size:13px;color:#e8ddcc}
+.hero{min-height:100svh;display:grid;place-items:center;text-align:center;padding:120px 20px 70px;position:relative;overflow:hidden;background:radial-gradient(ellipse at 50% 42%,#80613b66 0%,transparent 38%),linear-gradient(180deg,#17130fdd,#17130f99 55%,#17130f),repeating-linear-gradient(90deg,transparent 0 80px,#ffffff08 81px 82px),linear-gradient(135deg,#3a2c20,#17130f 55%,#332519)}
+.hero:before,.hero:after{content:"";position:absolute;border:1px solid #d7b77b55;border-radius:50%;width:min(70vw,680px);aspect-ratio:1;pointer-events:none}.hero:after{width:min(56vw,540px);border-color:#d7b77b33}
+.hero-inner{position:relative;z-index:1;max-width:850px}.seal{width:68px;height:68px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;margin:0 auto 26px;color:#f0d9a8;font-size:30px}
+h1{font-family:"Noto Serif SC","Songti SC",serif;font-weight:500;letter-spacing:.24em;font-size:clamp(42px,8vw,82px);margin:0 0 12px}.roman{letter-spacing:.32em;color:#f0d9a8;font-size:clamp(12px,2vw,16px)}
+.tag{margin:30px auto 38px;color:#e5d9c7;letter-spacing:.12em;line-height:2}.btn{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--gold);padding:15px 30px;color:#21180e;background:linear-gradient(135deg,#f0d9a8,#b99052);letter-spacing:.12em;font-weight:650;cursor:pointer}.btn.secondary{background:transparent;color:#f0d9a8;margin-left:10px}
+section.info{padding:78px 7vw}.eyebrow{color:var(--gold);letter-spacing:.24em;font-size:11px}h2{font-family:"Noto Serif SC","Songti SC",serif;font-size:clamp(28px,4vw,42px);font-weight:500;margin:12px 0 16px}.intro{max-width:760px;color:var(--muted);line-height:2}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:30px}.card{background:linear-gradient(145deg,#2b241c,#1c1712);border:1px solid #d7b77b33;padding:25px;min-height:160px}.card small{color:var(--gold);letter-spacing:.16em}.card h3{font-family:"Noto Serif SC","Songti SC",serif;font-size:23px;font-weight:500;margin:15px 0 8px}.card p{color:var(--muted);font-size:14px;line-height:1.8;margin:0}
+footer{padding:28px 7vw;border-top:1px solid #ffffff1c;color:#a99d8c;font-size:12px}
+#temple{display:none;position:fixed;inset:0;z-index:20;background:#100d09}#temple.active{display:block}#view{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hud{position:absolute;z-index:2;left:0;right:0;top:0;padding:15px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px;pointer-events:none}.hud>*{pointer-events:auto}.hud-title{font-size:12px;letter-spacing:.16em;color:#f0d9a8;text-shadow:0 2px 8px #000}
+.hud button,.actionbar button{background:#211b15dd;color:#f5e6c8;border:1px solid #d7b77b88;padding:10px 14px;border-radius:2px;cursor:pointer}
+.hint{position:absolute;left:50%;top:72px;transform:translateX(-50%);max-width:90%;text-align:center;background:#17130fcc;border:1px solid #d7b77b66;color:#e8ddcc;padding:9px 13px;font-size:12px;line-height:1.6;white-space:nowrap}
+.actionbar{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);display:flex;gap:8px;flex-wrap:wrap;justify-content:center;width:min(95%,620px)}
+.actionbar button{min-width:92px}.actionbar button:active{background:#80613b}
+#message{position:absolute;bottom:82px;left:50%;transform:translateX(-50%);background:#17130fee;border:1px solid #d7b77b77;color:#f0d9a8;padding:10px 16px;font-size:13px;display:none;max-width:90%;text-align:center}
+#message.show{display:block}
+.loading{position:absolute;inset:0;display:grid;place-items:center;color:#f0d9a8;background:#17130f;z-index:4;text-align:center;padding:24px}
+@media(max-width:650px){.top{padding:17px 5vw}.nav{gap:12px;font-size:11px}.cards{grid-template-columns:1fr}.hint{top:65px;font-size:11px;white-space:normal;width:92%}.actionbar{bottom:14px}.actionbar button{padding:10px 11px;min-width:78px;font-size:12px}.btn.secondary{margin:12px 0 0}}
+</style>
+</head>
+<body>
+<header class="top"><a class="brand" href="#">BEI XUAN GONG</a><nav class="nav"><a href="#about">关于北玄宫</a><a href="#deities">主殿神明</a></nav></header>
+<main>
+<section class="hero"><div class="hero-inner"><div class="seal">玄</div><h1>北玄宫</h1><div class="roman">BEI XUAN GONG</div><p class="tag">一方清静之境 · 一处文化传承之所<br>欢迎来到北玄宫虚拟空间</p><button class="btn" id="enter">进入虚拟主殿</button><a class="btn secondary" href="#about">认识北玄宫</a></div></section>
+<section class="info" id="about"><div class="eyebrow">ABOUT BEI XUAN GONG</div><h2>让信仰与文化，在数字空间相遇</h2><p class="intro">北玄宫虚拟神庙计划，以现代、宁静、庄严的空间语言，呈现道教信仰与华人文化。欢迎进入第一版 3D 主殿体验。</p></section>
+<section class="info" id="deities"><div class="eyebrow">MAIN HALL</div><h2>主殿神明</h2><p class="intro">主殿布局：太子居中为主神，左侧法主公，右侧玄天上帝。</p><div class="cards">
+<article class="card"><small>LEFT · 左侧</small><h3>法主公</h3><p>主殿左侧神位。神像造型将依北玄宫确认的传统形象进一步制作。</p></article>
+<article class="card"><small>CENTER · 主神</small><h3>太子</h3><p>北玄宫主神，居于主殿中央，是虚拟主殿的核心视觉。</p></article>
+<article class="card"><small>RIGHT · 右侧</small><h3>玄天上帝</h3><p>主殿右侧神位。后续将补充经确认的神像造型与文化介绍。</p></article></div></section>
+</main><footer>© <span id="year"></span> BEI XUAN GONG · 北玄宫　｜　虚拟文化空间第一阶段</footer>
+
+<div id="temple" aria-label="北玄宫3D虚拟主殿">
+  <canvas id="view"></canvas>
+  <div class="loading" id="loading">北玄宫虚拟主殿<br><small>正在准备 3D 场景…</small></div>
+  <div class="hud"><div class="hud-title">北玄宫 · 虚拟主殿</div><button id="exit">返回首页 ×</button></div>
+  <div class="hint">拖动屏幕旋转视角 · 滚轮缩放 · 手机可单指拖动、双指缩放</div>
+  <div id="message"></div>
+  <div class="actionbar">
+    <button data-action="incense">上香</button><button data-action="bow">合掌参拜</button><button data-action="lamp">点亮供灯</button><button data-action="intro">神明介绍</button>
+  </div>
+</div>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+  }
+}
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/controls/OrbitControls.js';
+document.getElementById('year').textContent=new Date().getFullYear();
+const temple=document.getElementById('temple'), canvas=document.getElementById('view'), loading=document.getElementById('loading'), message=document.getElementById('message');
+let renderer,scene,camera,controls,lamps=[],smoke=[];
+function say(t){message.textContent=t;message.classList.add('show');clearTimeout(say.timer);say.timer=setTimeout(()=>message.classList.remove('show'),3200)}
+function mat(color,metalness=0,roughness=.55){return new THREE.MeshStandardMaterial({color,metalness,roughness})}
+function box(w,h,d,m,x,y,z){const o=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);o.position.set(x,y,z);scene.add(o);return o}
+function cylinder(rt,rb,h,m,x,y,z,n=48){const o=new THREE.Mesh(new THREE.CylinderGeometry(rt,rb,h,n),m);o.position.set(x,y,z);scene.add(o);return o}
+function makePillar(x,z){cylinder(.18,.22,5,mat('#8d7658',.35),x,2.5,z);cylinder(.28,.28,.18,mat('#c6a66d',.65),x,4.95,z);cylinder(.25,.25,.16,mat('#c6a66d',.65),x,.12,z)}
+function makeDeity(x,label,main=false){
+ const gold=mat(main?'#e2c17e':'#b99a64',.62,.3),dark=mat('#33251a',.25,.48),skin=mat('#b98560',.1,.65);
+ // stepped altar
+ box(main?2.65:2.15,.35,1.35,gold,x,.48,-4.05);box(main?2.35:1.9,.38,1.1,dark,x,.83,-4.05);box(main?1.85:1.55,.25,.9,gold,x,1.13,-4.05);
+ // stylised placeholder figure: robe, head, crown halo
+ const robe=new THREE.Mesh(new THREE.ConeGeometry(main?.62:.5,1.5,8),gold);robe.position.set(x,2.05,-4.05);scene.add(robe);
+ const head=new THREE.Mesh(new THREE.SphereGeometry(.28,24,18),skin);head.position.set(x,2.98,-4.05);scene.add(head);
+ const crown=new THREE.Mesh(new THREE.CylinderGeometry(.23,.32,.25,8),gold);crown.position.set(x,3.28,-4.05);scene.add(crown);
+ const halo=new THREE.Mesh(new THREE.TorusGeometry(main?.82:.68,.035,10,64),gold);halo.position.set(x,2.9,-4.32);scene.add(halo);
+ const plaque=box(main?1.35:1.15,.35,.06,dark,x,1.45,-3.34);plaque.material=dark;
+ const canvas2=document.createElement('canvas');canvas2.width=512;canvas2.height=128;const ctx=canvas2.getContext('2d');ctx.fillStyle='#f0d9a8';ctx.font='bold 64px serif';ctx.textAlign='center';ctx.textBaseline='middle';ctx.fillText(label,256,65);
+ const tex=new THREE.CanvasTexture(canvas2);const sign=new THREE.Mesh(new THREE.PlaneGeometry(main?1.3:1.1,.28),new THREE.MeshBasicMaterial({map:tex,transparent:true}));sign.position.set(x,1.45,-3.30);scene.add(sign);
+}
+function build(){
+ scene=new THREE.Scene();scene.background=new THREE.Color('#120d09');scene.fog=new THREE.Fog('#120d09',19,42);
+ camera=new THREE.PerspectiveCamera(48,innerWidth/innerHeight,.1,100);camera.position.set(0,6.2,13.5);
+ renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:false});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.setSize(innerWidth,innerHeight);renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.PCFSoftShadowMap;renderer.toneMapping=THREE.ACESFilmicToneMapping;renderer.toneMappingExposure=1.35;
+ controls=new OrbitControls(camera,renderer.domElement);controls.target.set(0,3,-4.1);controls.enableDamping=true;controls.dampingFactor=.06;controls.minDistance=5;controls.maxDistance=22;controls.maxPolarAngle=Math.PI*.48;controls.minPolarAngle=.25;
+ const gold=mat('#c99b50',.72,.27),brightGold=mat('#edc878',.7,.22),darkWood=mat('#24160f',.28,.34),wood=mat('#49301d',.32,.32),black=mat('#171310',.35,.28),stone=mat('#4b4034',.25,.32),floorMat=mat('#55483c',.5,.22),warm=mat('#ffd18a',.1,.22);
+ scene.add(new THREE.HemisphereLight('#ffe9c6','#21160f',1.7));
+ const key=new THREE.DirectionalLight('#ffe0ae',3.3);key.position.set(-5,12,8);key.castShadow=true;scene.add(key);
+ const fill=new THREE.PointLight('#ffb95c',65,30);fill.position.set(0,7,-5);scene.add(fill);
+ const sideL=new THREE.PointLight('#ffbd70',24,18);sideL.position.set(-7,4,-2);scene.add(sideL);const sideR=sideL.clone();sideR.position.x=7;scene.add(sideR);
+ function addBox(w,h,d,m,x,y,z){const o=new THREE.Mesh(new THREE.BoxGeometry(w,h,d),m);o.position.set(x,y,z);o.castShadow=true;o.receiveShadow=true;scene.add(o);return o}
+ function addCyl(rt,rb,h,m,x,y,z,n=48){const o=new THREE.Mesh(new THREE.CylinderGeometry(rt,rb,h,n),m);o.position.set(x,y,z);o.castShadow=true;scene.add(o);return o}
+ function ring(radius,tube,m,x,y,z,rx=0){const o=new THREE.Mesh(new THREE.TorusGeometry(radius,tube,12,100),m);o.position.set(x,y,z);o.rotation.x=rx;scene.add(o);return o}
+ // polished dark stone floor and central approach
+ addBox(20,.3,25,floorMat,0,-.18,0);addBox(5,.025,17,mat('#9c8060',.45,.2),0,-.015,2);
+ // tall rear wall, side walls, and architectural frames
+ addBox(20,11,.5,darkWood,0,5.3,-9.2);addBox(.5,11,19,darkWood,-9.8,5.3,0);addBox(.5,11,19,darkWood,9.8,5.3,0);
+ addBox(18,.28,.35,gold,0,9.7,-8.82);addBox(18,.22,.28,gold,0,1,-8.82);
+ // vertical timber fins and illuminated wall panels
+ for(let x=-8.8;x<=8.8;x+=.48){addBox(.075,6.7,.12,wood,x,5.2,-8.82)}
+ for(const x of [-7.8,-5.9,5.9,7.8]){addBox(1.35,5.5,.18,black,x,5.1,-8.55);addBox(1.16,5.2,.035,stone,x,5.1,-8.43);addBox(.035,5.3,.07,brightGold,x-0.7,5.1,-8.35);addBox(.035,5.3,.07,brightGold,x+0.7,5.1,-8.35)}
+ // ceiling coffer grid and concentric illuminated ceremonial ceiling feature
+ addBox(20,.45,20,darkWood,0,10.7,0);
+ for(let x=-9;x<=9;x+=3){addBox(.22,.32,19,wood,x,10.43,0)}for(let z=-8;z<=8;z+=3){addBox(19,.32,.22,wood,0,10.43,z)}
+ const ceilingDisk=new THREE.Mesh(new THREE.CylinderGeometry(5.2,5.2,.16,96),black);ceilingDisk.position.set(0,10.25,-1.5);scene.add(ceilingDisk);
+  // V2.0: approved dragon-phoenix-Bagua ceiling artwork as a texture in the 3D temple.
+  const ceilingTexture=new THREE.TextureLoader().load('./ceiling-dragon-bagua.png');
+  ceilingTexture.colorSpace=THREE.SRGBColorSpace;
+  ceilingTexture.anisotropy=renderer.capabilities.getMaxAnisotropy();
+  const ceilingArtwork=new THREE.Mesh(
+    new THREE.CircleGeometry(5.08,160),
+    new THREE.MeshBasicMaterial({map:ceilingTexture,side:THREE.DoubleSide})
+  );
+  ceilingArtwork.rotation.x=-Math.PI/2;
+  ceilingArtwork.position.set(0,10.345,-1.5);
+  scene.add(ceilingArtwork);
+ const ceilingRing=ring(5.1,.13,brightGold,0,10.15,-1.5,Math.PI/2);const ceilingRing2=ring(4.55,.055,gold,0,10.13,-1.5,Math.PI/2);
+ // subtle ceiling medallion pattern, radial spokes
+ // V2.0 uses the approved ceiling mural texture for the dragon, phoenix and Bagua.
+ // altar backdrop: luminous circular halo, layered mountain-like relief panels
+ addBox(10.8,7.3,.35,black,0,5.2,-8.45);addBox(9.9,6.5,.18,stone,0,5.25,-8.22);
+ const halo=new THREE.Mesh(new THREE.CircleGeometry(3.25,96),new THREE.MeshBasicMaterial({color:'#6c4828'}));halo.position.set(0,5.1,-8.08);scene.add(halo);
+ ring(3.35,.11,brightGold,0,5.1,-8.0);ring(3.08,.035,gold,0,5.1,-7.98);
+ // altar steps, continuous main dais, then three separate raised plinths
+ addBox(10.5,.42,1.65,black,0,.48,-6.65);addBox(10.2,.13,1.7,gold,0,.73,-6.65);addBox(9.8,.32,1.4,darkWood,0,.94,-6.65);
+ function deity(x,name,main){const w=main?2.7:2.15;addBox(w,.34,1.35,black,x,1.35,-6.0);addBox(w+.12,.1,1.4,gold,x,1.57,-6.0);addBox(w-.22,.3,1.15,wood,x,1.77,-6.0);
+ // stylized dimensional statue placeholder with robe, torso, head, crown and halo
+ const robe=new THREE.Mesh(new THREE.ConeGeometry(main?.78:.63,1.75,10),gold);robe.position.set(x,2.78,-6.05);robe.castShadow=true;scene.add(robe);
+ const torso=new THREE.Mesh(new THREE.SphereGeometry(main?.57:.48,24,18),brightGold);torso.scale.set(1,.85,.7);torso.position.set(x,3.1,-6.05);scene.add(torso);
+ const head=new THREE.Mesh(new THREE.SphereGeometry(.3,24,20),mat('#b77d55',.08,.5));head.position.set(x,3.95,-6.05);scene.add(head);
+ const crown=new THREE.Mesh(new THREE.CylinderGeometry(.22,.34,.38,10),gold);crown.position.set(x,4.28,-6.05);scene.add(crown);
+ const h=ring(main?1.12:.9,.045,brightGold,x,3.95,-6.32);h.rotation.y=0;
+ // shoulder ornaments and robe sash
+ for(const s of [-1,1]){const sh=new THREE.Mesh(new THREE.SphereGeometry(.22,16,12),gold);sh.scale.set(1,.65,.8);sh.position.set(x+s*(main?.48:.4),3.38,-6.05);scene.add(sh)}
+ const signCanvas=document.createElement('canvas');signCanvas.width=512;signCanvas.height=128;const c=signCanvas.getContext('2d');c.fillStyle='#f4d69b';c.font='bold 68px serif';c.textAlign='center';c.textBaseline='middle';c.fillText(name,256,66);const tex=new THREE.CanvasTexture(signCanvas);const sign=new THREE.Mesh(new THREE.PlaneGeometry(main?1.5:1.3,.33),new THREE.MeshBasicMaterial({map:tex,transparent:true}));sign.position.set(x,2.0,-5.27);scene.add(sign);
+ }
+ deity(-3.25,'法主公',false);deity(0,'太子',true);deity(3.25,'玄天上帝',false);
+ // upper temple name plaque
+ addBox(5.4,1.05,.22,black,0,9.0,-8.05);addBox(5.5,.07,.28,gold,0,9.56,-8.0);addBox(5.5,.07,.28,gold,0,8.45,-8.0);
+ const titleCanvas=document.createElement('canvas');titleCanvas.width=1024;titleCanvas.height=256;const tc=titleCanvas.getContext('2d');tc.fillStyle='#efc477';tc.textAlign='center';tc.font='bold 112px serif';tc.fillText('北 玄 宫',512,132);tc.font='34px sans-serif';tc.letterSpacing='8px';tc.fillText('BEI XUAN GONG',512,202);const titleTex=new THREE.CanvasTexture(titleCanvas);const titleMesh=new THREE.Mesh(new THREE.PlaneGeometry(5.1,.95),new THREE.MeshBasicMaterial({map:titleTex,transparent:true}));titleMesh.position.set(0,9.0,-7.91);scene.add(titleMesh);
+ // offering table, incense burner and three kneeling cushions
+ addBox(7,.28,1.2,darkWood,0,1.15,-3.45);addBox(7.1,.09,1.25,gold,0,1.34,-3.45);
+ addCyl(.48,.58,.52,gold,0,1.75,-2.95,16);addCyl(.39,.45,.24,black,0,2.12,-2.95,16);addCyl(.13,.17,.38,gold,0,2.42,-2.95,12);
+ const cushionMat=mat('#6e4a2c',.08,.8);for(const x of [-2.35,0,2.35]){const c=new THREE.Mesh(new THREE.CylinderGeometry(.72,.78,.2,48),cushionMat);c.position.set(x,.02,1.2);scene.add(c)}
+ // decorative side lanterns and flowering branches
+ for(const x of [-7.2,7.2]){addBox(.7,1.5,.7,black,x,.85,-2.8);addBox(.58,1.05,.58,warm,x,1.05,-2.8);addBox(.85,.12,.85,gold,x,1.65,-2.8);const light=new THREE.PointLight('#ffc879',22,8);light.position.set(x,2.1,-2.8);scene.add(light);lamps.push(light);
+ const vase=addCyl(.25,.38,.8,black,x,.55,2.4);for(let j=0;j<7;j++){const branch=new THREE.Mesh(new THREE.CylinderGeometry(.018,.03,1.7,6),gold);branch.position.set(x+(Math.random()-.5)*.5,1.8,2.4+(Math.random()-.5)*.3);branch.rotation.z=(Math.random()-.5)*.65;scene.add(branch)}}
+ // floating incense haze above burner
+ const count=300,positions=new Float32Array(count*3);for(let i=0;i<count;i++){positions[i*3]=(Math.random()-.5)*1.2;positions[i*3+1]=2.4+Math.random()*3;positions[i*3+2]=-2.95+(Math.random()-.5)*.8}
+ const geo=new THREE.BufferGeometry();geo.setAttribute('position',new THREE.BufferAttribute(positions,3));const particles=new THREE.Points(geo,new THREE.PointsMaterial({color:'#e7d6bc',size:.035,transparent:true,opacity:.28}));scene.add(particles);smoke.push(particles);
+ const clock=new THREE.Clock();function animate(){requestAnimationFrame(animate);smoke.forEach(p=>{const a=p.geometry.attributes.position;for(let i=0;i<a.count;i++){a.array[i*3+1]+=.0025;if(a.array[i*3+1]>5.6)a.array[i*3+1]=2.4}a.needsUpdate=true});controls.update();renderer.render(scene,camera)}animate();
+ addEventListener('resize',()=>{if(!camera)return;camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight)});
+ loading.style.display='none';
+}
+document.getElementById('enter').addEventListener('click',()=>{temple.classList.add('active');document.body.style.overflow='hidden';if(!renderer){try{build()}catch(e){loading.innerHTML='3D 场景暂时无法启动<br><small>请使用较新的 Safari / Chrome，并确认网络可载入 Three.js。</small>';console.error(e)}}});
+document.getElementById('exit').addEventListener('click',()=>{temple.classList.remove('active');document.body.style.overflow=''});
+document.querySelectorAll('[data-action]').forEach(b=>b.addEventListener('click',()=>{const a=b.dataset.action;if(a==='incense')say('已为你呈上清香。愿心诚意敬，平安顺遂。');if(a==='bow')say('请面向主神太子，静心合掌参拜。');if(a==='lamp'){lamps.forEach(l=>l.intensity= l.intensity>15?8:22);say('供灯已点亮，愿光明常伴。')}if(a==='intro')say('主殿布局：中央太子（主神），左侧法主公，右侧玄天上帝。')}));
+</script>
+</body></html>
