@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#17130f">
-<title>北玄宫 BEI XUAN GONG V2.1 | V2.1</title>
+<title>北玄宫 BEI XUAN GONG V2.4 | V2.4</title>
 <style>
 :root{--gold:#d9bb82;--cream:#f5eee2;--ink:#17130f;--muted:#c9bda9}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#17130f;color:var(--cream);font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}
@@ -106,7 +106,7 @@ function build(){
  // ceiling coffer grid and concentric illuminated ceremonial ceiling feature
  addBox(20,.45,20,darkWood,0,10.7,0);
  for(let x=-9;x<=9;x+=3){addBox(.22,.32,19,wood,x,10.43,0)}for(let z=-8;z<=8;z+=3){addBox(19,.32,.22,wood,0,10.43,z)}
- // V2.1: wide rectangular ceiling relief so the dragon, phoenix and Bagua read clearly from the floor.
+ // V2.4: wide rectangular ceiling relief so the dragon, phoenix and Bagua read clearly from the floor.
  const ceilingPanel=new THREE.Mesh(new THREE.BoxGeometry(15.2,.22,5.15),black);
  ceilingPanel.position.set(0,10.25,-1.35);scene.add(ceilingPanel);
  const ceilingTexture=new THREE.TextureLoader().load('./ceiling-dragon-bagua.png');
@@ -117,13 +117,13 @@ function build(){
    new THREE.MeshBasicMaterial({map:ceilingTexture,side:THREE.DoubleSide})
  );
  ceilingArtwork.rotation.x=-Math.PI/2;
- ceilingArtwork.position.set(0,10.20,-1.35);
+ ceilingArtwork.position.set(0,10.10,-1.35);
  scene.add(ceilingArtwork);
  // Gold perimeter frame around the rectangular ceiling artwork.
- addBox(15.35,.12,.14,brightGold,0,10.21,-3.99);
- addBox(15.35,.12,.14,brightGold,0,10.21,1.29);
- addBox(.14,.12,5.25,brightGold,-7.6,10.21,-1.35);
- addBox(.14,.12,5.25,brightGold,7.6,10.21,-1.35);
+ addBox(15.35,.12,.14,brightGold,0,10.11,-3.99);
+ addBox(15.35,.12,.14,brightGold,0,10.11,1.29);
+ addBox(.14,.12,5.25,brightGold,-7.6,10.11,-1.35);
+ addBox(.14,.12,5.25,brightGold,7.6,10.11,-1.35);
  // subtle ceiling medallion pattern, radial spokes
  // V2.0 uses the approved ceiling mural texture for the dragon, phoenix and Bagua.
  // altar backdrop: luminous circular halo, layered mountain-like relief panels
