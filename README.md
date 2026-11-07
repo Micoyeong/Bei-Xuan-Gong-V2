@@ -1,5 +1,3 @@
-北玄宫 V2.2 天花板显示修复
-1. 本版本修正 ceiling artwork 被天花板结构遮挡的高度问题。
-2. 保留 V2.1 的 index.html 与 ceiling-dragon-bagua.png。
-3. 将本压缩包内三个文件上传到 Bei-Xuan-Gong-V2 仓库根目录并覆盖同名文件。
-4. Commit changes 后等待 Cloudflare 自动部署。
+北玄宫 V2.3 天花板木梁遮挡修复
+将龙凤八卦贴图及金色边框移至天花板格栅木梁下方，避免被木梁遮挡。
+将本压缩包中的 index.html、ceiling-dragon-bagua.png、README.md 上传至 Bei-Xuan-Gong-V2 仓库根目录，覆盖同名文件并 Commit changes。
